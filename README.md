@@ -1,7 +1,8 @@
 To install the project:
 
 ```bash
-git clone https://github.com/FoxyLuxe/cuts_appointment  
+git clone https://github.com/FoxyLuxe/cuts_appointment
+pip install -r cuts_appointment/requirements.txt
 ```
 To run project:
 
