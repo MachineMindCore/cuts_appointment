@@ -1,4 +1,5 @@
 !/.gitignore
+cuts_env/
 
 # Bytes-compile
 __pycache__/
