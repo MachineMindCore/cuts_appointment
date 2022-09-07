@@ -1,12 +1,17 @@
-To install the project:
+To clone the project:
 
 ```bash
 git clone https://github.com/FoxyLuxe/cuts_appointment
-pip install -r cuts_appointment/requirements.txt
-```
-To run project:
-
-```bash
 cd cuts_appointment
-python cuts_appointment/app.py
+```
+To create virtual enviroment and install packages:
+```bash
+python -m venv cuts_env
+source cuts_env/bin/activate
+pip install -r requirements.txt
+```
+
+To run project:
+```bash
+python run.py
 ```
