@@ -1,12 +1,11 @@
 from flask import Blueprint, render_template, url_for
-msg= "no se"
 
-blueprint = Blueprint('blueprint', __name__)
+public_blueprint = Blueprint('public_blueprint', __name__)
 
-@blueprint.route('/')
+@public_blueprint.route('/')
 def home():
-    return render_template("public/index.html")
+    try:
+        return render_template("public/index.html")
+    except:
+        return "index not found"
 
-@blueprint.route('/PATH')
-def get_path():
-    return f"<h1>{msg}<h1>"
