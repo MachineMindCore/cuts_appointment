@@ -5,7 +5,7 @@ load_dotenv()  # Carga todo el contenido de .env en variables de entorno
 
 
 class Config:
-    #SERVER_NAME = "localhost:5000"
+    SERVER_NAME = "localhost:5000"
     DEBUG = True
 
     #DATABASE_PATH = "src/database/contact_book.db"

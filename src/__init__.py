@@ -1,6 +1,6 @@
 from .routes.public import public_blueprint
 from flask import Flask
-from flask_bootstrap import Bootstrap
+# from flask_bootstrap import Bootstrap
 from config import Config
 
 app = Flask(
@@ -10,9 +10,8 @@ app = Flask(
     template_folder = Config.TEMPLATE_FOLDER,
 )
 
+# bootstrap =  Bootstrap(app)
 app.config.from_object(Config)
-
-#bootstrap = Bootstrap(app)
 app.register_blueprint(public_blueprint)
 
 
