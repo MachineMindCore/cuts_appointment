@@ -1,33 +1,19 @@
 <html>
   <head>
-    <title>sign up</title>
+    <title>Flask Intro - login page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
   <body>
     <div class="container">
-      <h1>Sign up register</h1>
+      <h1>Please login</h1>
       <br>
-      <form action="" method="POST">
+      <form action="" method="post">
         <input type="text" placeholder="Username" name="username" value="{{
           request.form.username }}">
-
          <input type="password" placeholder="Password" name="password" value="{{
           request.form.password }}">
-
-	 <input type="text" placeholder="Name" name="first_name" value="{{
-          request.form.first_name }}">
-
-	 <input type="text" placeholder="Surname" name="last_name" value="{{
-          request.form.last_name }}">
-
-	 <input type="text" placeholder="Number" name="number" value="{{
-          request.form.number }}">
-
-	 <input type="email" placeholder="Email" name="email" value="{{
-          request.form.email }}">
-	 
-        <input class="btn btn-default" type="submit" value="Sign up">
+        <input class="btn btn-default" type="submit" value="Login">
       </form>
       {% if error %}
         <p class="error"><strong>Error:</strong> {{ error }}

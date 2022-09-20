@@ -1,42 +1,4 @@
-###Directory archetype
-.
-├── CHANGELOG.md
-├── datacuts
-│   ├── __init__.py
-│   ├── app.py
-│   ├── back
-│   │   ├── api
-│   │   │   ├── __init__.py
-│   │   │   ├── resources
-│   │   │   │   └── __init__.py
-│   │   │   ├── schemas
-│   │   │   │   └── __init__.py
-│   │   │   └── views.py
-│   │   ├── auth
-│   │   │   ├── __init__.py
-│   │   │   └── views.py
-│   │   ├── config
-│   │   │   ├── __init__.py
-│   │   │   └── config.py
-│   │   ├── models
-│   │   │   └── __init__.py
-│   │   └── routes
-│   │       ├── __init__.py
-│   │       └── routes.py
-│   └── front
-│       ├── static
-│       │   ├── css
-│       │   │   └── style.css
-│       │   └── js
-│       │       └── index.js
-│       └── templates
-│           └── index.html
-├── notes.txt
-├── requirements.txt
-├── setup.py
-└── tests
-    ├── __init__.py
-    ├── test_auth.py
-    └── test_user.py
+__Tasks__
+-> Change forms/user - sign_up["POST"] return for HTML file
+-> Add Admin object and logic
 
-15 directories, 23 files

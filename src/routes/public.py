@@ -9,5 +9,5 @@ def home():
 @public_blueprint.route('/salon')
 def salon():
     return render_template("public/salon.html", title = "Barber - Salon")
- 
+
 
