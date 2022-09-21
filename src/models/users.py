@@ -20,7 +20,7 @@ class User(db.Model):
         self.email = email
 
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        return generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
@@ -34,6 +34,11 @@ class Appointment(db.Model):
     username = db.Column(db.String)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
+    price = db.Column(db.Integer)
+    service = db.Column(db.String)
     number = db.Column(db.String)
     email = db.Column(db.String)
     
+
+            
+
