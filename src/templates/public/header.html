@@ -9,16 +9,16 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item mx-3">
-            <a class="nav-link text-white" aria-current="page" href="/">Inicio</a>
+            <a {% if state == "inicio" %} style="border-bottom: 1px solid rgba(40,252,169,1);" {% endif%} class="nav-link text-white" aria-current="page" href="/">Inicio</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link text-white" href="/salon">Salon</a>
+            <a {% if state == "salon" %} style="border-bottom: 1px solid rgba(40,252,169,1);" {% endif%} class="nav-link text-white" href="/salon">Salon</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link text-white" href="#">Tienda</a>
+            <a {% if state == "tienda" %} style="border-bottom: 1px solid rgba(40,252,169,1);" {% endif%} class="nav-link text-white" href="#">Tienda</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link text-white" href="#">Promos</a>
+            <a {% if state == "promos" %} style="border-bottom: 1px solid rgba(40,252,169,1);" {% endif%} class="nav-link text-white" href="#">Promos</a>
           </li>
           <li class="nav-item mx-3 my-md-0 my-2">
             <button type="button" class="btn btn-success">Iniciar sesion</button>
