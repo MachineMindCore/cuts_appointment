@@ -38,8 +38,15 @@ def sign_up():
                 priority = "customer",
             )
             new_user.save()
-            return redirect("users/log_in.html")
+            return redirect("/log_in")
     return render_template("users/sign_up.html", form=form, error=error)
 
 def log_in():
-    return
+    if current_user.is_authenticated:
+        return redirect("/")
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.get_by_user(form.username.data)
+        if user is not None and user.check_password(form.password.data):
+            login_user(user, remember=form.remember.data)
+    return render_template('users/log_in.html', form=form)   

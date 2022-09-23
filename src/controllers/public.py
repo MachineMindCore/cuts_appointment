@@ -1,8 +1,17 @@
 from flask import render_template, url_for, request
 
 def home():
-    return render_template("public/index.html", title = "Barber")
+    template_vars = { 
+        "title": "Barber",
+        "state": "inicio"
+    }
+    return render_template("public/index.html", **template_vars)
 
 def salon():
-    return render_template("public/salon.html", title = "Barber - Salon")
+    template_vars = { 
+        "title": "Barber - Salon",
+        "state": "salon"
+    }
+    return render_template("public/salon.html", **template_vars)
+
 

@@ -11,7 +11,10 @@ class Config:
     #DB_TOKEN = os.environ.get("DB_TOKEN", "")  # Para Encriptar la DB
     #ENCRYPT_DB = True
     SQLALCHEMY_DATABASE_URI = "sqlite:///databases/users.db"
-    SQLALCHEMY_BINDS = {"appointments" : "sqlite:///databases/appointments.db"}
+    SQLALCHEMY_BINDS = {
+        "appointments" : "sqlite:///databases/appointments.db",
+        "services" : "sqlite:///databases/services.db"
+    }
     TEMPLATE_FOLDER = "templates/"
     STATIC_FOLDER = "static/"
 
