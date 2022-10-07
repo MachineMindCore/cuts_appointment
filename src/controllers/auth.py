@@ -42,11 +42,12 @@ def sign_up():
     return render_template("users/sign_up.html", form=form, error=error)
 
 def log_in():
+    print(current_user)
     if current_user.is_authenticated:
-        return redirect("/")
+        return render_template("public/index.html")
     form = LoginForm()
     if form.validate_on_submit():
         user = User.get_by_user(form.username.data)
         if user is not None and user.check_password(form.password.data):
             login_user(user, remember=form.remember.data)
-    return render_template('users/log_in.html', form=form)   
+            return render_template("public/index.html")
