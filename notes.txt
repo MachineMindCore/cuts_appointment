@@ -1,4 +1,0 @@
-__Tasks__
--> Change forms/user - sign_up["POST"] return for HTML file
--> Add Admin object and logic
-
