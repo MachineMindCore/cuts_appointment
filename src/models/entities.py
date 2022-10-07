@@ -2,7 +2,7 @@ from src.extentions.extentions import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-class User(db.Model, UserMixin):
+class User(db.Model): #, UserMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -13,14 +13,14 @@ class User(db.Model, UserMixin):
     number = db.Column(db.String(10), unique=True, nullable=False)
     flag = db.Column(db.String(80), nullable=False)
    
-    def __init__(self, username, password, first_name, last_name, number, email, priority="customer"):
+    def __init__(self, username, password, firstName, lastName, number, email, flag="customer"):
         self.username = username
         self.set_password(password)
-        self.first_name = first_name
-        self.last_name = last_name
+        self.firstName = firstName
+        self.lastName = lastName
         self.number = number
         self.email = email
-        self.flag = "user"
+        self.flag = flag
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -63,14 +63,14 @@ class User(db.Model, UserMixin):
         return User.query.filter_by(username=user).first()
     
     def __repr__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.firstName} {self.lastName}"
 
 class Appointment(db.Model):
     __bind_key__ = "appointments"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String)
-    first_name = db.Column(db.String)
-    last_name = db.Column(db.String)
+    firstName = db.Column(db.String)
+    lastName = db.Column(db.String)
     price = db.Column(db.Integer)
     service = db.Column(db.String)
     number = db.Column(db.String)

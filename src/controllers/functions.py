@@ -1,5 +1,5 @@
-from flask import render_template
-
+from flask import render_template, redirect
+from src.extentions.extentions import db
 from src.models.forms import LoginForm, SignupForm
 from src.models.entities import User
 
