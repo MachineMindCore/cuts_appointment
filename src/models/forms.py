@@ -1,21 +1,22 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField, IntegerField
-from wtforms.validators import DataRequired, Email, Length
-
+from wtforms.validators import DataRequired, Email, Length, InputRequired
 
 class SignupForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired(), Length(max=10)])
-    password = PasswordField('password', validators=[DataRequired()])
-    first_name = StringField('first_name', validators=[DataRequired()])
-    last_name = StringField('last_name', validators=[DataRequired()])
-    number = IntegerField('number', validators=[DataRequired()])
-    email = StringField('email', validators=[DataRequired(), Email()])
-    submit = SubmitField('submit')
+    username  = StringField('Usuario', validators=[InputRequired(message="Este campo no puede estar vacio"), Length(min=4, max=16)])
+    password  = PasswordField('Contraseña', validators=[InputRequired(message="Este campo no puede estar vacio"), Length(min=8, max=16)])
+    email = StringField("Email", validators=[InputRequired(message="Este campo no puede estar vacio"), Email(message="Este no es un email valido"), Length(max=60)])
+    firstName  = StringField('Nombre', validators=[InputRequired(message="Este campo no puede estar vacio"), Length(min=4, max=16)])
+    lastName  = StringField('Apellido', validators=[InputRequired(message="Este campo no puede estar vacio"), Length(min=4, max=16)])
+    number  = StringField('Numero de celular', validators=[InputRequired(message="Este campo no puede estar vacio"), Length(min=4, max=16)])
+    enviar = SubmitField('Registro')
 
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired(), Length(max=10)])
-    password = PasswordField('password', validators=[DataRequired()])
-    remember = BooleanField('remember')
-    submit = SubmitField('submit')
+    username  = StringField('Usuario', validators=[InputRequired(message="Este campo no puede estar vacio"),
+Length(min=4, max=16, message="El nombre del usuario tiene que tener entre %(min)d y %(max)d caracteres")])
+    password  = PasswordField('Contraseña', validators=[InputRequired(message="Este campo no puede estar vacio"),
+Length(min=8, max=16, message="La contraseña tiene que tener entre %(min)d y %(max)d caracteres")])
+    remember  = BooleanField('Recordarme')
+    enviar = SubmitField('Inicia sesion')
 

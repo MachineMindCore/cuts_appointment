@@ -1,4 +1,6 @@
 from src.models.entities import User
+
+
 from src.models.forms import SignupForm, LoginForm
 from src.extentions.extentions import db, login_manager
 from src.utils.handlers import signup_handler
@@ -51,3 +53,24 @@ def log_in():
         if user is not None and user.check_password(form.password.data):
             login_user(user, remember=form.remember.data)
             return render_template("public/index.html")
+
+
+#################
+from flask import render_template, url_for, request
+
+def home():
+    template_vars = { 
+        "title": "Barber",
+        "state": "inicio"
+    }
+    return render_template("public/index.html", **template_vars)
+
+def salon():
+    template_vars = { 
+        "title": "Barber - Salon",
+        "state": "salon"
+    }
+    return render_template("public/salon.html", **template_vars)
+
+
+

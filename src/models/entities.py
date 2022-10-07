@@ -5,13 +5,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class User(db.Model, UserMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(200), nullable=False, unique=True)
-    password_hash = db.Column(db.String(128))
-    first_name = db.Column(db.String(200), nullable=False)
-    last_name = db.Column(db.String(200), nullable=False)
-    number = db.Column(db.String(200), nullable=False, unique=True)
-    email = db.Column(db.String(200), nullable=False, unique=True)
-    priority = db.Column(db.String(200), nullable=False)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(80))
+    email = db.Column(db.String(80), unique=True, nullable=False)
+    firstName = db.Column(db.String(80), nullable=False)
+    lastName = db.Column(db.String(80), nullable=False)
+    number = db.Column(db.String(10), unique=True, nullable=False)
+    flag = db.Column(db.String(80), nullable=False)
    
     def __init__(self, username, password, first_name, last_name, number, email, priority="customer"):
         self.username = username
@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
         self.last_name = last_name
         self.number = number
         self.email = email
-        self.priority = priority
+        self.flag = "user"
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
