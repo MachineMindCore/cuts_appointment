@@ -75,7 +75,7 @@ class Appointment(db.Model):
     name = db.Column(db.String) #service : username
     description = db.Column(db.String)
     value = db.Column(db.Integer)
-    date = db.Column(db.DateTime)
+    date = db.Column(db.DateTime, unique=True)
     init_hour = db.Column(db.Integer)
     end_hour = db.Column(db.Integer)
     status = db.Column(db.String)

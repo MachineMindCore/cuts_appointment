@@ -65,6 +65,10 @@ def dash():
     return render_template('dash.html', **template_vars)
 
 def availability():
+    def clean_time(date):
+        date_str=date.strftime('%Y-%m-%d %H:%M:%S')
+        return dt.datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+
     def make_dates(now, weekday):
         WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday",
         "Friday", "Saturday", "Sunday"]
@@ -74,7 +78,7 @@ def availability():
         day = day.replace(hour=0, minute=0, second=0)
         start = 7
         stop = 20
-        dates = [day+dt.timedelta(hours=i) for i in range(24)]
+        dates = [clean_time(day+dt.timedelta(hours=i)) for i in range(24)]
         filtered = []
         for i in range(len(dates)):
             if dates[i].hour < start or dates[i].hour > stop:
@@ -106,13 +110,21 @@ def availability():
         return days
 
     def pop_dates(dates):
+        WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday",
+            "Friday", "Saturday", "Sunday"]
         busy = Appointment.get_all()
-        print(busy)
+        for appointment in busy:
+            date = appointment.date
+            day = WEEKDAYS[date.weekday()]
+            print(date)
+            print(dates[day])
+            if date in dates[day]:
+                dates[day].remove(date)
         return dates
             
     now = dt.datetime.now().replace(minute=0, second=0)
     dates = make_day(make_week(), now)
-    true_dates = dates#pop_dates(dates)
+    true_dates = pop_dates(dates)
     return true_dates
 
 def set_appointment():
