@@ -3,8 +3,12 @@
     margin: 0;
 }
 
+
 body {
     background: linear-gradient(90deg, rgba(40,252,169,1) 0%, rgba(254,125,114,1) 46%);
+    /* background-image: url('../img/Recurso3.png');
+    background-size: cover;
+    background-repeat: no-repeat; */
 }
 
 .box {
@@ -19,8 +23,27 @@ body {
     height: 500px;
     width: 300px;
     padding: 20px;
+    margin-bottom: 7rem;
 }
 
+.box-img {
+    height: 60vh;
+    overflow: hidden;
+    /* object-fit:contain; */
+}
+
+.img-ca {
+    height: 60vh;
+    object-fit: cover;
+    
+}
+
+@media (max-width: 990px) {
+    .box-img {
+      height: 30vh ;
+    }
+  }
+  
 .nav-tabs .nav-link,
 .nav-tabs .nav-link.active {
     color: black;
