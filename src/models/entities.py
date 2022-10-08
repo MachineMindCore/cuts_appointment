@@ -13,6 +13,11 @@ class User(db.Model):  # , UserMixin):
     lastName = db.Column(db.String(80), nullable=False)
     number = db.Column(db.String(10), unique=True, nullable=False)
     flag = db.Column(db.String(80), nullable=False)
+ 
+    __mapper_args__ = {
+        "polymorphic_identity": "employee",
+        "polymorphic_on": type,
+    }
 
     def __init__(self, username, password, firstName, lastName, number, email, flag="customer"):
         self.username = username
@@ -23,15 +28,15 @@ class User(db.Model):  # , UserMixin):
         self.email = email
         self.flag = flag
 
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+    def set_password(self, in_password):
+        self.password = generate_password_hash(in_password)
         return
 
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+    def check_password(self, in_password):
+        return check_password_hash(self.password, in_password)
 
     def check_priority(self):
-        if self.priority == "admin":
+        if self.flag == "admin":
             return True
         else:
             return False
@@ -77,3 +82,7 @@ class Appointment(db.Model):
     service = db.Column(db.String)
     number = db.Column(db.String)
     email = db.Column(db.String)
+
+    __mapper_args__ = {
+        "polymorphic_identity": "appointments"
+    }    
