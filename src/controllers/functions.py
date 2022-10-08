@@ -3,9 +3,7 @@ from src.extentions.extentions import db
 from src.models.forms import LoginForm, SignupForm
 from src.models.entities import User
 
-# Authentication functions
-
-
+#Authentication functions
 def register():
     registro = SignupForm()
 
@@ -13,16 +11,15 @@ def register():
         new_user = User(
             username=registro.username.data,
             email=registro.email.data, password=registro.password.data,
-            firstName=registro.firstName.data,
-            lastName=registro.lastName.data,
-            number=registro.number.data, flag="1"
+            firstName=registro.firstName.data, 
+            lastName=registro.lastName.data, 
+            number=registro.number.data,
         )
         db.session.add(new_user)
         db.session.commit()
         db.session.close()
         return redirect(url_for('home.index'))
     return render_template('register.html', formi=registro)
-
 
 def login():
     login = LoginForm()
@@ -31,8 +28,7 @@ def login():
         return redirect(url_for('home'))
     return render_template('login.html', formi=login)
 
-# Public sites
-
+#Public sites
 
 def index():
     template_vars = {
@@ -40,7 +36,6 @@ def index():
         "state": "inicio"
     }
     return render_template("index.html", **template_vars)
-
 
 def salon():
     template_vars = {

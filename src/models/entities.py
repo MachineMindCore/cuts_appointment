@@ -13,11 +13,7 @@ class User(db.Model):  # , UserMixin):
     lastName = db.Column(db.String(80), nullable=False)
     number = db.Column(db.String(10), unique=True, nullable=False)
     flag = db.Column(db.String(80), nullable=False)
- 
-    __mapper_args__ = {
-        "polymorphic_identity": "employee",
-        "polymorphic_on": type,
-    }
+
 
     def __init__(self, username, password, firstName, lastName, number, email, flag="customer"):
         self.username = username
@@ -75,14 +71,12 @@ class User(db.Model):  # , UserMixin):
 class Appointment(db.Model):
     __bind_key__ = "appointments"
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String)
-    firstName = db.Column(db.String)
-    lastName = db.Column(db.String)
-    price = db.Column(db.Integer)
-    service = db.Column(db.String)
-    number = db.Column(db.String)
-    email = db.Column(db.String)
+    name = db.Column(db.String)
+    description = db.Column(db.String)
+    value = db.Column(db.Integer)
+    date = db.Column(db.DateTime)
+    init_hour = db.Column(db.DateTime)
+    end_hour = db.Column(db.DateTime)
+    status = db.Column(db.String)
+    id_user = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    __mapper_args__ = {
-        "polymorphic_identity": "appointments"
-    }    
