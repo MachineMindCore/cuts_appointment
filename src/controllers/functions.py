@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, flash
 from src.extentions.extentions import db
-from src.models.forms import LoginForm, SignupForm
+from src.models.forms import LoginForm, SignupForm, ProductForm, InventoryForm
 from src.models.entities import User
 
 # Authentication functions
@@ -30,7 +30,7 @@ def login():
     login = LoginForm()
 
     if login.validate_on_submit():
-        return redirect(url_for('home'))
+        return redirect(url_for('home.index'))
     return render_template('login.html', formi=login)
 
 # Public sites

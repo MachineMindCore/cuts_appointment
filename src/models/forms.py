@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, BooleanField, IntegerField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, IntegerField, Form, FieldList, FormField
 from wtforms.validators import DataRequired, Email, Length, InputRequired
 
 class SignupForm(FlaskForm):
@@ -20,3 +20,11 @@ Length(min=8, max=16, message="La contraseña tiene que tener entre %(min)d y %(
     remember  = BooleanField('Recordarme')
     enviar = SubmitField('Inicia sesion')
 
+
+class ProductForm(Form):
+    title = StringField('Title')
+    price = IntegerField('Price')
+
+class InventoryForm(FlaskForm):
+    category_name = StringField('Category Name')
+    products = FieldList(FormField(ProductForm))
