@@ -127,13 +127,31 @@ def availability():
     return true_dates
 
 def get_appointments():
+    def make_data(appointment: Appointment):
+        user = User.get_by_id(appointment.id_user)
+        data = {}
+        data["id"] = appointment.id
+        data["id_user"] = appointment.id_user
+        data["service"] = appointment.name.split(":")[0]
+        data["description"] = appointment.description
+        data["value"] = appointment.value 
+        data["date"] = appointment.date
+        data["init_hour"] = appointment.init_hour
+        data["end_hour"] = appointment.end_hour
+        data["status"] = appointment.status
+        data["fistName"] = user.firstName
+        data["lastName"] = user.lastName
+        return data
+
     id_user = current_user.id
     role = current_user.flag
     appointments = None
     if role == "customer":
-        appointments = Appointment.get_by_id(id_user)
+        query = Appointment.get_by_id(id_user)
     elif role == "admin":
-        appointments = Appointment.get_all()
+        query = Appointment.get_all()
+    
+    appointments = list(map(lambda obj: make_data(obj), query))
     return appointments
 
 def set_appointment():
