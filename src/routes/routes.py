@@ -9,6 +9,7 @@ from src.controllers.functions import (
     logout,
     dash,
     availability,
+    set_appointment,
 )
 
 home = Blueprint('home', __name__, template_folder='templates',
@@ -23,3 +24,4 @@ home.add_url_rule('/userstorage', methods=['GET'], view_func=get_user_storage)
 home.add_url_rule('/logout', methods=['GET', 'POST'], view_func=logout)
 home.add_url_rule('/dash', methods=['GET', 'POST'], view_func=dash)
 home.add_url_rule('/avaliable', methods=['GET'], view_func=availability)
+home.add_url_rule('/cita', methods=['GET','POST'], view_func=set_appointment)

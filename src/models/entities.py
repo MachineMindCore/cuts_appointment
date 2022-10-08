@@ -88,11 +88,12 @@ class Appointment(db.Model):
         self.set_value()
         self.set_init_hour()
         self.set_end_hour()
+        self.set_id_user()
         return
 
     def set_value(self):
         service = self.name.split(":")[0]
-        if service == "razurada":
+        if service == "rasurada":
             self.value = 20000
             self.description = "razurada simple"
         elif service == "corte":
@@ -115,7 +116,8 @@ class Appointment(db.Model):
         return
 
     def set_id_user(self):
-        username = self.name.split(":")[0]
+        username = self.name.split(":")[1]
+        print(username)
         self.id_user = User.get_by_user(username).id
         return
     

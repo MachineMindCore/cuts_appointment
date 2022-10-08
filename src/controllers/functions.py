@@ -1,6 +1,6 @@
 import os
 import datetime as dt
-from flask import render_template, redirect, url_for, flash, jsonify
+from flask import render_template, redirect, url_for, flash, jsonify, request
 from flask_security import current_user, login_user, login_required, logout_user
 
 
@@ -113,7 +113,18 @@ def availability():
     dates = make_day(make_week(), now)
     true_dates = dates#pop_dates(dates)
     return true_dates
-    
+
+def set_appointment():
+    date_str = request.form["hora"].split('.')[0]
+    service = request.form["servicio"]
+    name = f"{service}:{current_user.username}"
+    date = dt.datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+
+    appointment = Appointment(name, date)
+    db.session.add(appointment)
+    db.session.commit()
+    db.session.close()
+    return redirect(url_for("home.index"))
 
 # Public sites
 
@@ -127,7 +138,7 @@ def get_user():
 def index():
     template_vars = {
         "title": "Barber",
-        "state": "inicio",
+        "statmmutableMultiDicte": "inicio",
         "is_log": current_user.is_authenticated
     }
     return render_template("index.html", **template_vars)
