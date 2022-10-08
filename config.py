@@ -7,3 +7,4 @@ class Config:
     SQLALCHEMY_DATABASE_URI = "sqlite:///databases/barber.db"
     TEMPLATE_FOLDER = "templates/"
     STATIC_FOLDER = "static/"
+    JSON_SORT_KEYS = False
