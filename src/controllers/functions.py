@@ -83,7 +83,8 @@ def availability():
                 pass
             else:
                 filtered.append(dates[i])
-        filtered.pop(0)
+        if filtered != []:
+            filtered.pop(0)
         return filtered
     
     def make_week():
