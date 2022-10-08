@@ -24,3 +24,7 @@ body {
 .nav-tabs .nav-link.active {
     color: black;
 }
+
+.alert-success{
+    color: green;
+}

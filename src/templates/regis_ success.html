@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="box">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        {% with messages = get_flashed_messages(with_categories=true) %} 
+            {% for category, message in messages %} 
+                <h3 class="alert-{{category}}">{{ message }}</h3>
+            {% endfor %} 
+        {% endwith %}
+        <button type="button" id="login" class="btn btn-success">Iniciar sesion</button>
+    </div>
+</div>
+
+{% endblock content %}
