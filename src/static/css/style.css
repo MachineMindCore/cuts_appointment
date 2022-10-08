@@ -7,4 +7,20 @@ body {
     background: linear-gradient(90deg, rgba(40,252,169,1) 0%, rgba(254,125,114,1) 46%);
 }
 
+.box {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+}
 
+.box-card {
+    height: 500px;
+    width: 300px;
+    padding: 20px;
+}
+
+.nav-tabs .nav-link,
+.nav-tabs .nav-link.active {
+    color: black;
+}
