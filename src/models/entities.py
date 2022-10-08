@@ -124,6 +124,11 @@ class Appointment(db.Model):
     @staticmethod
     def get_all():
         return Appointment.query.all()
+
+    @staticmethod
+    def get_by_id(id_user):
+        return Appointment.query.filter_by(id_user=id_user).all()
+
     
     @staticmethod
     def check_date(date):
@@ -131,3 +136,6 @@ class Appointment(db.Model):
         if appointment and appointment["date"] == date:
             return True
         return False
+
+    def __repr__(self):
+        return f"{self.name}"

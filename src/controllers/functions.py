@@ -60,7 +60,8 @@ def dash():
         "title": "Barber - Dash",
         "state": "dash",
         "user": current_user,
-        "av_data": availability()
+        "av_data": availability(),
+        "bu_data": get_appointments(),
     }
     return render_template('dash.html', **template_vars)
 
@@ -116,8 +117,6 @@ def availability():
         for appointment in busy:
             date = appointment.date
             day = WEEKDAYS[date.weekday()]
-            print(date)
-            print(dates[day])
             if date in dates[day]:
                 dates[day].remove(date)
         return dates
@@ -126,6 +125,16 @@ def availability():
     dates = make_day(make_week(), now)
     true_dates = pop_dates(dates)
     return true_dates
+
+def get_appointments():
+    id_user = current_user.id
+    role = current_user.flag
+    appointments = None
+    if role == "customer":
+        appointments = Appointment.get_by_id(id_user)
+    elif role == "admin":
+        appointments = Appointment.get_all()
+    return appointments
 
 def set_appointment():
     date_str = request.form["hora"].split('.')[0]

@@ -10,6 +10,7 @@ from src.controllers.functions import (
     dash,
     availability,
     set_appointment,
+    get_appointments,
 )
 
 home = Blueprint('home', __name__, template_folder='templates',
@@ -25,3 +26,4 @@ home.add_url_rule('/logout', methods=['GET', 'POST'], view_func=logout)
 home.add_url_rule('/dash', methods=['GET', 'POST'], view_func=dash)
 home.add_url_rule('/avaliable', methods=['GET'], view_func=availability)
 home.add_url_rule('/cita', methods=['GET','POST'], view_func=set_appointment)
+home.add_url_rule('/consulta_cita', methods=['GET', 'POST'], view_func=get_appointments)
