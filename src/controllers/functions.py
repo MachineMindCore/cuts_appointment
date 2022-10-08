@@ -30,18 +30,17 @@ def register():
 
 def login():
     login = LoginForm()
-    username = login.username.data
-    password = login.password.data
 
     if login.validate_on_submit():
+        username = login.username.data
+        password = login.password.data
         user = User.get_by_user(username)
-        if user.check_password(password):
+        if user and user.check_password(password):
             login_user(user, remember=True)
-            flash("looged in")
-            print(current_user)
-            return redirect(url_for('home.index'))
+            return redirect(url_for('home.dash'))
         else:
-            return "Incorrect Password"
+            flash("Usuario o contraseña incorrecto", "danger")
+            render_template('login.html', formi=login)
 
     return render_template('login.html', formi=login)
 
@@ -53,7 +52,11 @@ def logout():
 # Private sites
 @login_required
 def dash():
-    return f"{current_user}"
+    template_vars = {
+        "title": "Barber - Dash",
+        "state": "dash"
+    }
+    return render_template('dash.html', **template_vars)
 
 # Public sites
 
@@ -67,7 +70,8 @@ def get_user():
 def index():
     template_vars = {
         "title": "Barber",
-        "state": "inicio"
+        "state": "inicio",
+        "is_log": current_user.is_authenticated
     }
     return render_template("index.html", **template_vars)
 
@@ -75,6 +79,7 @@ def index():
 def salon():
     template_vars = {
         "title": "Barber - Salon",
-        "state": "salon"
+        "state": "salon",
+        "is_log": current_user.is_authenticated
     }
     return render_template("salon.html", **template_vars)

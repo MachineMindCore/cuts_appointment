@@ -5,6 +5,14 @@
 
 <div class="box">
     <div class="box-card">
+        {% with messages = get_flashed_messages(with_categories=true) %} 
+            {% for category, message in messages %} 
+                <h3 class="alert-{{category}}"></h3>
+                <div class="alert alert-{{category}}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %} 
+        {% endwith %}
         <ul class="nav nav-tabs">
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/login">Iniciar Sesion</a></li>
             <li class="nav-item"><a class="nav-link" href="/registro">Registro</a></li>

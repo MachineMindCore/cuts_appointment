@@ -6,7 +6,10 @@
     <div class="d-flex flex-column justify-content-center align-items-center">
         {% with messages = get_flashed_messages(with_categories=true) %} 
             {% for category, message in messages %} 
-                <h3 class="alert-{{category}}">{{ message }}</h3>
+                <h3 class="alert-{{category}}"></h3>
+                <div class="alert alert-{{category}}" role="alert">
+                    {{ message }}
+                </div>
             {% endfor %} 
         {% endwith %}
         <button type="button" id="login" class="btn btn-success">Iniciar sesion</button>
