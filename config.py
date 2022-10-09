@@ -1,7 +1,7 @@
 import os
 
 class Config:
-    DEBUG = True
+    DEBUG = False
     SECRET_KEY = os.urandom(32).hex()
     SECURITY_PASSWORD_SALT = os.urandom(128).hex()
     SQLALCHEMY_DATABASE_URI = "sqlite:///databases/barber.db"

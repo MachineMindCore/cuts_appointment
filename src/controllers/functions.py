@@ -145,7 +145,7 @@ def get_appointments():
 
     id_user = current_user.id
     role = current_user.flag
-    appointments = None
+    appointments = []
     query = None
     if role == "customer":
         query = Appointment.get_by_id_user(id_user)
@@ -175,27 +175,39 @@ def delete_appointment(appointment_id):
     return redirect(url_for("home.dash"))
 
 # Multi-threading funtions
-
-def update_appointments_status():
-    def kill_appointments():
+def update_appointments_status(**args):
+    app = args["app"]
+    db = args["db"]
+    import datetime as dt
+    import sched, time
+    def kill_appointments(db, app):
         appointments = Appointment.get_all()
         now = dt.datetime.now()
-        for appointment in appointments:
-            date = appointment.date
-            if date < now:
-                db.session.delete(appointment)
-        db.session.commit()
-        db.session.close()
+        with app.app_context():
+            for appointment in appointments:
+                date = appointment.date
+                print(date < now)
+                if date < now:
+                    db.session.delete(appointment)
+            db.session.commit()
+            db.session.close()
         return
 
-    try:
-        while True:
-            target_time = 100
+    kill_appointments(db, app)
+    while True:
+        try:
+            now = dt.datetime.now().replace(minute=0, second=0)
+            target_time = now + dt.timedelta(minutes=60)
             appoint_killer = sched.scheduler(time.localtime, time.sleep)
             appoint_killer.enterabs(target_time, 0, kill_db)
-    except:
-        update_appointments_status()
+            time.sleep(5)
+        except:
+            break
     return -1
+
+def test_daemon(*args):
+    print(f"daemon entered-> {args}")
+    return
 
 # Public sites
 
