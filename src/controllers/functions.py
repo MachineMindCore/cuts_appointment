@@ -1,4 +1,4 @@
-import os
+import os, sched, time
 import datetime as dt
 from flask import render_template, redirect, url_for, flash, jsonify, request
 from flask_security import current_user, login_user, login_required, logout_user
@@ -164,7 +164,30 @@ def set_appointment():
     db.session.add(appointment)
     db.session.commit()
     db.session.close()
-    return redirect(url_for("home.index"))
+    return redirect(url_for("home.dash"))
+
+# Multi-threading funtions
+
+def update_appointments_status():
+    def kill_appointments():
+        appointments = Appointment.get_all()
+        now = dt.datetime.now()
+        for appointment in appointments:
+            date = appointment.date
+            if date < now:
+                db.session.delete(appointment)
+                db.session.commit()
+        db.session.close()
+        return
+
+    try:
+        while True:
+            target_time = 100
+            appoint_killer = sched.scheduler(time.localtime, time.sleep)
+            appoint_killer.enterabs(target_time, 0, kill_db)
+    except:
+        update_appointments_status()
+    return
 
 # Public sites
 
