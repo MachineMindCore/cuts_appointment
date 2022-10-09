@@ -13,6 +13,32 @@
 
     <div class="col-12 col-lg-4" style="background-color: white; height: 70vh;">
         <h1 class="p-3" style="color: #ff7b75;">Apartar una cita</h1>
+
+        <div class="p-2 mb-2">
+            <h5>Seleccionar hora: </h5>
+            <select class="form-select" id="hora" aria-label="Default select example">
+                {% for key, values in av_data.items() %}
+                    {%if values %}
+                        <optgroup label="{{ key }}">
+                            {% for value in values %}
+                                <option {% if loop.index == 0 %} selected  {% endif %} value="{{value}}">{{value.strftime('%Y-%m-%d -- %I %p ')}}</option>
+                            {% endfor %}
+                        </optgroup>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="p-2 mb-2">
+            <h5>Seleccionar servicio: </h5>
+            <select class="form-select" id="servicio" aria-label="Default select example">
+                <option value="rasurada">Rasurada</option>
+                <option value="corte">Corte</option>
+                <option value="limpieza">Limpieza</option>
+            </select>
+        </div>
+
+        <button type="button" id="guardar" class="btn btn-success">Guardar</button>
     </div> 
 </div>
 

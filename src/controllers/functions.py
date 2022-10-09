@@ -112,7 +112,7 @@ def availability():
     now = dt.datetime.now().replace(minute=0, second=0)
     dates = make_day(make_week(), now)
     true_dates = dates#pop_dates(dates)
-    return jsonify(true_dates)
+    return true_dates
     
 
 # Public sites
