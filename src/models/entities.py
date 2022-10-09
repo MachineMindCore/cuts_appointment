@@ -1,3 +1,4 @@
+import datetime as dt
 from src.extentions.database import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -69,14 +70,62 @@ class User(db.Model, UserMixin):
 
 
 class Appointment(db.Model):
-    __bind_key__ = "appointments"
+    __tablename__ = "appointments"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String) #service : username
     description = db.Column(db.String)
     value = db.Column(db.Integer)
     date = db.Column(db.DateTime)
-    init_hour = db.Column(db.DateTime)
-    end_hour = db.Column(db.DateTime)
+    init_hour = db.Column(db.Integer)
+    end_hour = db.Column(db.Integer)
     status = db.Column(db.String)
     id_user = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
+    def __init__(self, name, date, status="apartado"):
+        self.name = name
+        self.date = date
+        self.status = status
+        self.set_value()
+        self.set_init_hour()
+        self.set_end_hour()
+        return
+
+    def set_value(self):
+        service = self.name.split(":")[0]
+        if service == "razurada":
+            self.value = 20000
+            self.description = "razurada simple"
+        elif service == "corte":
+            self.value = 35000
+            self.description = "corte completo"
+        elif service == "limpieza":
+            self.value = 25000
+            self.description = "limpieza completa"
+        else:
+            self.value = 0
+            self.description = "servicio personalizado"
+        return
+
+    def set_init_hour(self):
+        self.init_hour = self.date.hour
+        return
+    
+    def set_end_hour(self):
+        self.end_hour = self.date.hour + 1
+        return
+
+    def set_id_user(self):
+        username = self.name.split(":")[0]
+        self.id_user = User.get_by_user(username).id
+        return
+    
+    @staticmethod
+    def get_all():
+        return Appointment.query.all()
+    
+    @staticmethod
+    def check_date(date):
+        appointment = Appointment.query.filter_by(date=date).first()
+        if appointment and appointment["date"] == date:
+            return True
+        return False
