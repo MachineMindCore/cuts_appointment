@@ -146,12 +146,14 @@ def get_appointments():
     id_user = current_user.id
     role = current_user.flag
     appointments = None
+    query = None
     if role == "customer":
-        query = Appointment.get_by_id(id_user)
+        query = Appointment.get_by_id_user(id_user)
     elif role == "admin":
         query = Appointment.get_all()
     
-    appointments = list(map(lambda obj: make_data(obj), query))
+    if query:
+        appointments = list(map(lambda obj: make_data(obj), query))
     return appointments
 
 def set_appointment():
@@ -159,9 +161,15 @@ def set_appointment():
     service = request.form["servicio"]
     name = f"{service}:{current_user.username}"
     date = dt.datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
-
     appointment = Appointment(name, date)
     db.session.add(appointment)
+    db.session.commit()
+    db.session.close()
+    return redirect(url_for("home.dash"))
+
+def delete_appointment(appointment_id):
+    deleted = Appointment.get_by_id(appointment_id)
+    db.session.delete(deleted)
     db.session.commit()
     db.session.close()
     return redirect(url_for("home.dash"))
@@ -176,7 +184,7 @@ def update_appointments_status():
             date = appointment.date
             if date < now:
                 db.session.delete(appointment)
-                db.session.commit()
+        db.session.commit()
         db.session.close()
         return
 
@@ -187,7 +195,7 @@ def update_appointments_status():
             appoint_killer.enterabs(target_time, 0, kill_db)
     except:
         update_appointments_status()
-    return
+    return -1
 
 # Public sites
 

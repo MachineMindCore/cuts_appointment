@@ -124,9 +124,13 @@ class Appointment(db.Model):
     @staticmethod
     def get_all():
         return Appointment.query.all()
+    
+    @staticmethod
+    def get_by_id(id):
+        return Appointment.query.filter_by(id=id).first()
 
     @staticmethod
-    def get_by_id(id_user):
+    def get_by_id_user(id_user):
         return Appointment.query.filter_by(id_user=id_user).all()
 
     
