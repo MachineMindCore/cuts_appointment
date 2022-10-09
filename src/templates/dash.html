@@ -9,6 +9,22 @@
 <div class="row p-4 gap-4 text-center" style="margin: 0 auto ;">
     <div class="col-12 col-lg-7" style="background-color: white; height: 70vh;">
         <h1 class="p-3" style="color: #ff7b75;">Citas actuales</h1>
+        <div class="d-flex gap-2 mt-5 overflow-scroll">
+            {% for data in bu_data %}
+                <div class="card" style="min-width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">Cita</h5>
+                    <p class="card-text"><strong>Nombre:</strong> {{data["fistName"]}}</p>
+                    <p class="card-text"><strong>Apellido:</strong> {{data["lastName"]}}</p>
+                    <p class="card-text"><strong>Servicio:</strong> {{data["service"]}}</p>
+                    <p class="card-text"><strong>Precio:</strong> {{data["value"]}}</p>
+                    <p class="card-text"><strong>Fecha:</strong> {{data["date"]}}</p>
+                    <p class="card-text"><strong>Estatus:</strong> {{data["status"]}}</p>
+                    <a href="/delete/{{data['id']}}" class="btn btn-danger">Borrar</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>   
     </div>
 
     <div class="col-12 col-lg-4" style="background-color: white; height: 70vh;">
